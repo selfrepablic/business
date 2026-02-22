@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仕事の美学｜ビジネス基本10か条</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-white: #FFFFFF;
+            --text-gray: #CCCCCC;
+            --accent-gold: #B8860B;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050505;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-white);
+        }
+
+        .page {
+            width: 1080px;
+            height: 1920px;
+            background-color: var(--bg-color);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            transform-origin: center center;
+        }
+
+        @media print {
+            body {
+                background-color: var(--bg-color);
+                padding: 0;
+                gap: 0;
+                display: block;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+            }
+
+            @page {
+                size: 1080px 1920px;
+                margin: 0;
+            }
+        }
+
+        .mincho {
+            font-family: 'Noto Serif JP', serif;
+        }
+
+        .gothic {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        .content-wrap {
+            padding: 240px 120px;
+            box-sizing: border-box;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* P1 Cover */
+        .p-cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .pyramid-logo {
+            width: 160px;
+            height: 160px;
+            margin-bottom: 120px;
+            background: conic-gradient(from 180deg at 50% 50%, #050505 0deg, var(--accent-gold) 180deg, #050505 360deg);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            box-shadow: 0 0 50px rgba(184, 134, 11, 0.2);
+        }
+
+        .p-cover .main-title {
+            font-size: 130px;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            margin-bottom: 80px;
+            text-shadow: 0 10px 50px rgba(184, 134, 11, 0.6);
+        }
+
+        .p-cover .sub-title {
+            font-size: 40px;
+            letter-spacing: 0.1em;
+            margin-bottom: 40px;
+        }
+
+        .p-cover .tagline {
+            font-size: 30px;
+            color: var(--text-gray);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        /* P2 Philosophy */
+        .p-philosophy .content-wrap {
+            justify-content: center;
+            font-size: 38px;
+            line-height: 2.2;
+            color: var(--text-gray);
+            font-weight: 300;
+            letter-spacing: 0.08em;
+        }
+
+        .p-philosophy p {
+            margin-bottom: 80px;
+        }
+
+        .p-philosophy p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* P3 Map */
+        .p-map .intro {
+            font-size: 36px;
+            line-height: 2;
+            color: var(--text-gray);
+            margin-bottom: 160px;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .p-map .stages {
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-bottom: 150px;
+        }
+
+        .p-map .stages::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            bottom: 20px;
+            width: 2px;
+            background: linear-gradient(to bottom, rgba(184, 134, 11, 1), rgba(184, 134, 11, 0.2));
+        }
+
+        .p-map .stage {
+            padding-left: 100px;
+            position: relative;
+        }
+
+        .p-map .stage::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 25px;
+            width: 28px;
+            height: 28px;
+            transform: rotate(45deg);
+            border: 2px solid var(--accent-gold);
+            background-color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(184, 134, 11, 0.5);
+        }
+
+        .p-map .stage-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 30px;
+            letter-spacing: 0.1em;
+        }
+
+        .p-map .stage-desc {
+            font-size: 36px;
+            color: var(--text-white);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* Art Pages */
+        .p-art {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+        }
+
+        .p-art .bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.9;
+        }
+
+        .p-art .overlay-gradient {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to top, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0.7) 30%, rgba(5, 5, 5, 0) 100%);
+            z-index: 2;
+        }
+
+        .p-art .art-title {
+            position: relative;
+            z-index: 3;
+            font-size: 80px;
+            font-weight: 900;
+            margin-bottom: 120px;
+            letter-spacing: 0.15em;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+            color: var(--text-white);
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Text Pages */
+        .p-text .content-wrap {
+            justify-content: space-between;
+            padding-top: 300px;
+            padding-bottom: 200px;
+        }
+
+        .p-text .catchphrase {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.8;
+            margin-bottom: 120px;
+            padding-bottom: 80px;
+            border-bottom: 1px solid rgba(184, 134, 11, 0.4);
+            letter-spacing: 0.05em;
+        }
+
+        .p-text .body-text {
+            font-size: 38px;
+            line-height: 2.2;
+            color: var(--text-gray);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .p-text .text-bottom {
+            border-top: 2px solid var(--accent-gold);
+            padding-top: 80px;
+            background: radial-gradient(ellipse at top, rgba(184, 134, 11, 0.05), transparent 70%);
+        }
+
+        .p-text .question-label {
+            font-size: 34px;
+            color: var(--accent-gold);
+            margin-bottom: 40px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .p-text .question-text {
+            font-size: 44px;
+            line-height: 1.7;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        /* P24 Conclusion */
+        .p-conclusion .content-wrap {
+            justify-content: center;
+            font-size: 38px;
+            line-height: 2.2;
+            color: var(--text-white);
+            font-weight: 300;
+            letter-spacing: 0.08em;
+        }
+
+        .p-conclusion p {
+            margin-bottom: 80px;
+        }
+
+        .p-conclusion .signature {
+            text-align: right;
+            font-size: 50px;
+            margin-top: 120px;
+            color: var(--text-gray);
+            letter-spacing: 0.15em;
+        }
+
+        /* P25 Signature */
+        .p-signature {
+            background-color: var(--bg-color);
+            background-image:
+                linear-gradient(rgba(184, 134, 11, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(184, 134, 11, 0.08) 1px, transparent 1px);
+            background-size: 60px 60px;
+            background-position: center center;
+        }
+
+        .p-signature .content-wrap {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .p-signature .declaration {
+            font-size: 60px;
+            line-height: 2;
+            text-align: center;
+            margin-bottom: 300px;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .p-signature .sig-box {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .p-signature .sig-label {
+            font-size: 36px;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            letter-spacing: 0.1em;
+        }
+
+        .p-signature .sig-line {
+            width: 80%;
+            height: 2px;
+            background-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(184, 134, 11, 0.8);
+            position: relative;
+        }
+
+        /* P26 CTA */
+        .p-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .p-cta .cta-logo {
+            width: 200px;
+            height: 200px;
+            background: conic-gradient(from 180deg at 50% 50%, #050505 0deg, var(--accent-gold) 180deg, #050505 360deg);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            margin-bottom: 120px;
+            box-shadow: 0 0 50px rgba(184, 134, 11, 0.2);
+        }
+
+        .p-cta .cta-text {
+            font-size: 50px;
+            letter-spacing: 0.15em;
+            margin-bottom: 160px;
+            font-weight: 500;
+        }
+
+        .p-cta .cta-links {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            width: 70%;
+        }
+
+        .p-cta .cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            font-size: 40px;
+            color: var(--text-white);
+            text-decoration: none;
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.02);
+            letter-spacing: 0.1em;
+        }
+
+        .p-cta .cta-btn:hover {
+            border-color: var(--accent-gold);
+            background: rgba(184, 134, 11, 0.1);
+            box-shadow: 0 0 30px rgba(184, 134, 11, 0.2);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        /* Swiper Adjustments */
+        html,
+        body {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            background-color: #050505;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100%;
+            background-color: #050505;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #050505;
+            overflow: hidden;
+        }
+
+        .swiper-pagination-bullet {
+            background: #fff;
+            opacity: 0.3;
+            width: 8px;
+            height: 8px;
+            margin: 0 6px !important;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--accent-gold);
+            opacity: 1;
+        }
+
+        .swiper-pagination {
+            bottom: 25px !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- P1 Cover -->
+    <div class="page p-cover">
+        <div class="pyramid-logo"></div>
+        <div class="mincho main-title">仕事の美学</div>
+        <div class="gothic sub-title">ビジネス基本10か条</div>
+        <div class="gothic tagline">成果を出す前の、静かなる思考の軸</div>
+    </div>
+
+    <!-- P2 Philosophy -->
+    <div class="page p-philosophy">
+        <div class="content-wrap gothic">
+            <p>この10か条は、「成果を出すためのテクニック」や「成功するためのノウハウ」をまとめたものではありません。<br>
+                目指しているのは、仕事に向き合う姿勢そのものを、美しく、強く、しなやかに整えること。</p>
+            <p>仕事の成果は、知識やスキルよりも、日々どんな構えで働いているかによって、長い時間をかけて決まっていきます。</p>
+            <p>焦らず、奪わず、驕らず、流されず。<br>
+                それでも、静かに勝ち続ける人の仕事観。</p>
+            <p>これは「正解」を押し付けるものではありません。あなた自身の仕事観を見つめ直し、自己欺瞞から抜け出し、日々の判断と行動を整えるための「思考の鏡」として使ってもらえたら幸いです。</p>
+        </div>
+    </div>
+
+    <!-- P3 Map -->
+    <div class="page p-map">
+        <div class="content-wrap">
+            <div class="intro gothic">
+                真の熟達へ向かう道のりには、大きく分けて3つのステージが存在します。ご自身の現状がどこにあるか、静かに見つめながら以下の10か条を読み進めてください。
+            </div>
+            <div class="stages">
+                <div class="stage">
+                    <div class="stage-title gothic">ステージ1【衝動】</div>
+                    <div class="stage-desc gothic">外部の評価や他人の言動に感情が振り回され、自分を見失っている状態。</div>
+                </div>
+                <div class="stage">
+                    <div class="stage-title gothic">ステージ2【適応】</div>
+                    <div class="stage-desc gothic">ルールや構造を理解し、優秀に仕事をこなすが、既存の枠組みや「正しさ」に縛られている状態。</div>
+                </div>
+                <div class="stage">
+                    <div class="stage-title gothic">ステージ3【静寂】</div>
+                    <div class="stage-desc gothic">確固たる自分の軸を持ち、全体を俯瞰しながら、静かな余裕を持って他者を導ける「真の熟達」の状態。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P4 Art 1 -->
+    <div class="page p-art">
+        <img class="bg-img" src="images/rule_1_art.webp" alt="Art">
+        <div class="overlay-gradient"></div>
+        <div class="art-title mincho">① 自分の軸を持て</div>
+    </div>
+
+    <!-- P5 Text 1 -->
+    <div class="page p-text">
+        <div class="content-wrap">
+            <div class="text-top gothic">
+                <div class="catchphrase">周囲の評価や流行ではなく、自分自身の判断基準で意思決定すること。</div>
+                <div class="body-text">
+                    仕事では多数派に合わせた方が楽な場面が多くありますが、迎合を続けるほど自分の立ち位置は曖昧になり、やがて「代替可能な存在」になります。<br>自分なりの価値基準を持ち、ときに孤独を選びながらでも一貫した判断を続けること。それが、信頼される“個”をつくります。
+                </div>
+            </div>
+            <div class="text-bottom gothic">
+                <div class="question-label">【内省の問い】</div>
+                <div class="question-text">波風を立てないこと「だけ」を理由に、自分の意見を飲み込んだ決断はないか？</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P6 Art 2 -->
+    <div class="page p-art">
+        <img class="bg-img" src="images/rule_2_art.webp" alt="Art">
+        <div class="overlay-gradient"></div>
+        <div class="art-title mincho">② 信用を資産として積み上げろ</div>
+    </div>
+
+    <!-- P7 Text 2 -->
+    <div class="page p-text">
+        <div class="content-wrap">
+            <div class="text-top gothic">
+                <div class="catchphrase">信用は、短期的に得るものではなく、行動の積み重ねによって蓄積される資産である。</div>
+                <div class="body-text">
+                    約束を守る。継続する。評価がなくても、やるべきことをやる。<br>こうした地味な行動の連続が、時間をかけて「お金では買えない信用」を生み出します。信用を失うのは一瞬、積み上げるのは何年もかかる。だからこそ、信用は最優先で守るべき資産なのです。
+                </div>
+            </div>
+            <div class="text-bottom gothic">
+                <div class="question-label">【内省の問い】</div>
+                <div class="question-text">誰も見ていない場所でも、昨日と同じ品質の仕事ができたか？</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P8 Art 3 -->
+    <div class="page p-art">
+        <img class="bg-img" src="images/rule_3_art.webp" alt="Art">
+        <div class="overlay-gradient"></div>
+        <div class="art-title mincho">③ 感情を支配しろ</div>
+    </div>
+
+    <!-- P9 Text 3 -->
+    <div class="page p-text">
+        <div class="content-wrap">
+            <div class="text-top gothic">
+                <div class="catchphrase">感情に振り回されず、自分の内面を観察し、制御する力を持つこと。</div>
+                <div class="body-text">
+                    怒り、焦り、嫉妬、不安。仕事の現場では感情を揺さぶられる場面が必ず訪れます。<br>そのとき、即座に反応せず、一拍置いて状況を見渡せるか。この差が、判断の質と信頼の差になります。感情に支配されない自分でいること。それが仕事の美学です。
+                </div>
+            </div>
+            <div class="text-bottom gothic">
+                <div class="question-label">【内省の問い】</div>
+                <div class="question-text">相手の言葉ではなく、自分の「傷ついたプライド」に対して怒っていないか？</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P10 Art 4 -->
+    <div class="page p-art">
+        <img class="bg-img" src="images/rule_4_art.webp" alt="Art">
+        <div class="overlay-gradient"></div>
+        <div class="art-title mincho">④ 決断を遅らせるな</div>
+    </div>
+
+    <!-- P11 Text 4 -->
+    <div class="page p-text">
+        <div class="content-wrap">
+            <div class="text-top gothic">
+                <div class="catchphrase">不確実な中でも、責任を引き受ける覚悟を持つこと。</div>
+                <div class="body-text">
+                    決断を先送りするほど選択肢は減り、状況は悪化します。完璧な情報が揃う瞬間は、ほとんど訪れません。<br>だからこそ、不完全な中で決める勇気がリーダーシップとなります。決めることは、責任を引き受けること。それを恐れない姿勢こそが重要です。
+                </div>
+            </div>
+            <div class="text-bottom gothic">
+                <div class="question-label">【内省の問い】</div>
+                <div class="question-text">「まだ情報が足りない」を言い訳にして、責任から逃げているだけではないか？</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P12 Art 5 -->
+    <div class="page p-art">
+        <img class="bg-img" src="images/rule_5_art.webp" alt="Art">
+        <div class="overlay-gradient"></div>
+        <div class="art-title mincho">⑤ 欲望から目を逸らすな</div>
+    </div>
+
+    <!-- P13 Text 5 -->
+    <div class="page p-text">
+        <div class="content-wrap">
+            <div class="text-top gothic">
+                <div class="catchphrase">自分の野心や欲望を否定せず、正しく認識すること。</div>
+                <div class="body-text">
+                    承認欲求、名誉欲、金銭欲。これらは決して悪ではありません。むしろ欲望を抑え込むほど判断は歪み、行動は不自然になります。<br>大切なのは、自分が何を欲しているかを正直に知ること。その上で、欲望に振り回されず使いこなすことが成熟した仕事の姿勢です。
+                </div>
+            </div>
+            <div class="text-bottom gothic">
+                <div class="question-label">【内省の問い】</div>
+                <div class="question-text">「社会のため」「チームのため」という美しい言葉で、自分の「認められたい」という本音を隠していないか？</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P14 Art 6 -->
+    <div class="page p-art">
+        <img class="bg-img" src="images/rule_6_art.webp" alt="Art">
+        <div class="overlay-gradient"></div>
+        <div class="art-title mincho">⑥ 構造を理解しろ</div>
+    </div>
+
+    <!-- P15 Text 6 -->
+    <div class="page p-text">
+        <div class="content-wrap">
+            <div class="text-top gothic">
+                <div class="catchphrase">表面的な現象ではなく、背後にある仕組みや力関係を読むこと。</div>
+                <div class="body-text">
+                    市場、組織、人間関係。あらゆる場所に、見えない構造が存在します。<br>感情や印象に流されず、全体を俯瞰し、構造として捉えることで、一手先の判断が可能になります。構造を読む力は、仕事の再現性を高める最大の武器です。
+                </div>
+            </div>
+            <div class="text-bottom gothic">
+                <div class="question-label">【内省の問い】</div>
+                <div class="question-text">目の前の「嫌な上司や顧客」という個人の問題にすり替え、システムの欠陥から目を背けていないか？</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P16 Art 7 -->
+    <div class="page p-art">
+        <img class="bg-img" src="images/rule_7_art.webp" alt="Art">
+        <div class="overlay-gradient"></div>
+        <div class="art-title mincho">⑦ 観察せよ、反応するな</div>
+    </div>
+
+    <!-- P17 Text 7 -->
+    <div class="page p-text">
+        <div class="content-wrap">
+            <div class="text-top gothic">
+                <div class="catchphrase">即座に反応せず、まず状況を見極めること。</div>
+                <div class="body-text">
+                    沈黙は弱さではなく、最も高度な戦略です。相手の言葉、態度、間を丁寧に観察することで、見えなかった意図や本音が浮かび上がります。<br>動かない勇気。それが、大きな失敗を防ぎ、質の高い決断を生みます。
+                </div>
+            </div>
+            <div class="text-bottom gothic">
+                <div class="question-label">【内省の問い】</div>
+                <div class="question-text">相手の話を聞くふりをして、頭の中では「次に自分が言い返す言葉」を探していないか？</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P18 Art 8 -->
+    <div class="page p-art">
+        <img class="bg-img" src="images/rule_8_art.webp" alt="Art">
+        <div class="overlay-gradient"></div>
+        <div class="art-title mincho">⑧ 弱さと向き合え</div>
+    </div>
+
+    <!-- P19 Text 8 -->
+    <div class="page p-text">
+        <div class="content-wrap">
+            <div class="text-top gothic">
+                <div class="catchphrase">自分の欠点や限界を直視し、逃げないこと。</div>
+                <div class="body-text">
+                    人は誰でも弱さを抱えています。それを隠そうとすると虚勢となり、人間関係は歪みます。<br>弱さを認めることで、成長の余地が生まれ、他者との信頼関係が深まります。強さとは、弱さを受け入れる勇気です。
+                </div>
+            </div>
+            <div class="text-bottom gothic">
+                <div class="question-label">【内省の問い】</div>
+                <div class="question-text">虚勢を張って「できるふり」をした結果、誰よりも自分が一番疲弊していないか？</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P20 Art 9 -->
+    <div class="page p-art">
+        <img class="bg-img" src="images/rule_9_art.webp" alt="Art">
+        <div class="overlay-gradient"></div>
+        <div class="art-title mincho">⑨ 静かな余裕を持て</div>
+    </div>
+
+    <!-- P21 Text 9 -->
+    <div class="page p-text">
+        <div class="content-wrap">
+            <div class="text-top gothic">
+                <div class="catchphrase">焦らず、奪わず、選択の余白を残すこと。</div>
+                <div class="body-text">急ぎ、競い、奪い合うほど、仕事は荒れ、判断は短絡的になります。<br>一歩引き、状況を整え、静かに構える。その余裕が、長期的な優位性を生みます。</div>
+            </div>
+            <div class="text-bottom gothic">
+                <div class="question-label">【内省の問い】</div>
+                <div class="question-text">常に忙しそうに振る舞うことで、自分の価値を証明しようとしていないか？</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P22 Art 10 -->
+    <div class="page p-art">
+        <img class="bg-img" src="images/rule_10_art.webp" alt="Art">
+        <div class="overlay-gradient"></div>
+        <div class="art-title mincho">⑩ 去り際を美しくせよ</div>
+    </div>
+
+    <!-- P23 Text 10 -->
+    <div class="page p-text">
+        <div class="content-wrap">
+            <div class="text-top gothic">
+                <div class="catchphrase">役割を終えたら、執着せず、静かに身を引くこと。</div>
+                <div class="body-text">
+                    勝ち続けようとするほど無理が生じ、評価を落とします。終わらせ方には、その人の本質が表れます。<br>去り際の美しさは最大のブランディングであり、それが次の信頼と機会を連れてきます。</div>
+            </div>
+            <div class="text-bottom gothic">
+                <div class="question-label">【内省の問い】</div>
+                <div class="question-text">自分が去った後、その場所が「自分がいなくても回る」ように準備して手放す勇気はあるか？</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P24 Conclusion -->
+    <div class="page p-conclusion">
+        <div class="content-wrap gothic">
+            <p>この10か条は、一度読んで終わるものではありません。<br>
+                日々の仕事の中で迷ったとき、感情が波立ちそうになったとき、あるいは自己欺瞞に陥りそうになったとき。静かに読み返してください。</p>
+            <p>ご自身の現在地が「衝動」であっても「適応」であっても構いません。<br>
+                大切なのは、現在地から目を逸らさないことです。</p>
+            <p>その繰り返しの先に、あなた自身の揺るぎない「仕事の美学」が育ち、真の熟達（静寂）へと至るはずです。</p>
+            <p>最後までお読みいただき、ありがとうございました。</p>
+            <div class="signature mincho">SelfRepablic</div>
+        </div>
+    </div>
+
+    <!-- P25 Signature -->
+    <div class="page p-signature">
+        <div class="content-wrap">
+            <div class="declaration mincho">今日から、私が私の主権者である。<br>自分の現実は、自分で設計する。</div>
+            <div class="sig-box">
+                <div class="sig-label mincho">Signature of the Architect</div>
+                <div class="sig-line"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P26 CTA -->
+    <div class="page p-cta">
+        <div class="cta-logo"></div>
+        <div class="cta-text gothic">真の自立は、ここから始まる。</div>
+        <div class="cta-links gothic">
+            <a href="#" class="cta-btn">YouTubeチャンネルへ</a>
+            <a href="#" class="cta-btn">公式ニュースレター</a>
+        </div>
+    </div>
+
+    <!-- Swiper JS & Initialization -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const pages = document.querySelectorAll('.page');
+            const body = document.body;
+
+            // Create Swiper structure
+            const swiperContainer = document.createElement('div');
+            swiperContainer.className = 'swiper mySwiper';
+
+            const swiperWrapper = document.createElement('div');
+            swiperWrapper.className = 'swiper-wrapper';
+
+            // Wrap pages into slides
+            pages.forEach(page => {
+                const slide = document.createElement('div');
+                slide.className = 'swiper-slide';
+                // move page into slide
+                page.parentNode.insertBefore(slide, page);
+                slide.appendChild(page);
+                swiperWrapper.appendChild(slide);
+            });
+
+            // Move everything into swiper container
+            swiperContainer.appendChild(swiperWrapper);
+
+            // Add pagination
+            const pagination = document.createElement('div');
+            pagination.className = 'swiper-pagination';
+            swiperContainer.appendChild(pagination);
+
+            // Insert to body
+            body.insertBefore(swiperContainer, body.firstChild);
+
+            // Scaling logic to fit smartphone app view flawlessly
+            function resizePages() {
+                const scale = Math.min(window.innerWidth / 1080, window.innerHeight / 1920);
+                pages.forEach(page => {
+                    page.style.transform = `scale(${scale})`;
+                });
+            }
+            window.addEventListener('resize', resizePages);
+            resizePages();
+
+            // Initialize Swiper
+            new Swiper('.mySwiper', {
+                pagination: {
+                    el: '.swiper-pagination',
+                    dynamicBullets: true,
+                },
+                grabCursor: true,
+                keyboard: {
+                    enabled: true,
+                },
+            });
+        });
+    </script>
+</body>
+
+</html>
